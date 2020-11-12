@@ -36,6 +36,72 @@ Ensuite depuis `SNMPb`, on peut "découvrir" le nouvel agent.
 
 
 
+### 5 objets SNMP
+
+**TODO**
+
+### Mofication de Win A pour intérroger Win B
+
+Pour permettre la machine Win A d'intéroger la machine Win B, il suffit d'ajouter un nouveau `Agent Profiles`  en lui spécifiant l'adresse IP de Win B. Et finalement, il faut changer la valeur de la `community string RO` à **not-public**.
+
+| Agent Profiles                       | Community string                     |
+| ------------------------------------ | ------------------------------------ |
+| ![](img/objectif3_wina_changes1.png) | ![](img/objectif3_wina_changes2.png) |
+
+Ensuite, lors de la configuration de Win B, il a fallut ajouter Win A (192.168.1.3) dans la liste des hôtes pouvant envoyer des paquets SNMP.
+
+![](img/objectif3_winb_config.png)
+
+Et maintenant, si l'on intéroge l'agent Win B afin d'obtenir la `description système`, on vois que l'on reçoit bien une réponse.
+
+![](img/objectif3_winb_interogation.png)
+
+
+
+### Interrogation de Win B
+
+![](img/objectif3_winb_name.jpg)
+
+> Nom de l'équipement
+
+
+
+![](img/objectif3_winb_resp.jpg)
+
+> Nom du responsable de l'équipement
+
+
+
+![](img/objectif3_winb_model.jpg)
+
+> Modèle de l'équipement
+
+
+
+![](img/objectif3_winb_nbinterface.jpg)
+
+> Nombre d'intérfaces de l'équipement
+
+
+
+![]()
+
+| N°   | Octets rentrant | Octets sortant |
+| ---- | --------------- | -------------- |
+| 1    |                 |                |
+| 2    |                 |                |
+| 3    |                 |                |
+| 4    |                 |                |
+| 5    |                 |                |
+| 6    |                 |                |
+| 7    |                 |                |
+| 8    |                 |                |
+| 9    |                 |                |
+
+
+
+> Trafic sur chaque interfaces 
+
 ## Objectif 4 - MIBs privées
 
 ## Objectif 5 - Configurer les agents SNMP en mode v3
