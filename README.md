@@ -38,7 +38,15 @@ Ensuite depuis `SNMPb`, on peut "découvrir" le nouvel agent.
 
 ### 5 objets SNMP
 
-**TODO**
+![](./img/obj1.png)
+
+![](./img/obj2.png)
+
+![](./img/obj3.png)
+
+![](./img/obj4.png)
+
+![](./img/obj5.png)
 
 ### Modification de Win A pour interroger Win B
 
@@ -82,10 +90,6 @@ Et maintenant, si l'on interroge l'agent Win B afin d'obtenir la `description sy
 
 > Nombre d’interfaces de l'équipement
 
-
-
-![]()
-
 | N°   | Octets rentrant | Octets sortant |
 | ---- | --------------- | -------------- |
 | 1    |                 |                |
@@ -101,6 +105,54 @@ Et maintenant, si l'on interroge l'agent Win B afin d'obtenir la `description sy
 
 
 > Trafic sur chaque interfaces 
+
+
+
+> A l’aide de Wireshark, capturez et présentez de manière lisible les trames lorsque la machine Windows 10 A interroge la machine Windows 10 B pour obtenir le nom de l’équipement (les champs concernant SNMP doivent être visibles et commentés). 
+
+![](./img/request.png)
+
+On peut voir que dans la requête, on retrouve l'Oid de sysName **1.3.6.1.2.1.1.5**.
+
+![](./img/response.png)
+
+Et dans la réponse, on a le nom de la machine dans le champ **variable-binding-string**.
+
+### Activer et configurez l’agent SNMP sur le routeur Cisco
+
+> Configurez le routeur cisco de manière à pouvoir le gérer via SNMPv2 (choisissez « cisco » pour community string RO et « ciscor » pour community string RW). Configurez également le routeur pour qu’il envoie ses traps snmp au manager.
+
+![](./img/cisco.png)
+
+> Créez un nouveau profil dans l’application SNMPb pour pouvoir gérer votre routeur.
+
+![](./img/cisco_conf1.png)
+
+![](./img/cisco_conf2.png)
+
+> Changez le nom du routeur à l’aide de l’application  SNMPb (nouveau nom : router<votre-nom>) tout en capturant/analysant les messages échangés à l’aide de Wireshark
+
+
+
+> Que pouvez-vous dire sur la sécurité du protocole SNMPv2 ? Citez deux moyens d’améliorer la sécurité de notre infrastructure. 
+
+
+
+> Générez une trap SNMP en déclenchant un événement sur votre routeur (un peu d’imagination...) et vérifiez que vous récupérez bien la « SNMP trap » sur l’application SNMPb.
+
+
+
+> Analysez les trames de la capture précédente et décodez la signification des différents messages SNMP en recherchant la signification du « OID code » à l’aide du SNMP Object Navigator Cisco https://mibs.cloudapps.cisco.com/ITDIT/MIBS/servlet/index (compte Cisco à créer si nécessaire)
+
+### Windows Powershell permet de créer des scripts, utiles pour récupérer des informations de manière régulière et automatisée par exemple.
+
+> Récupérez le nom de votre routeur à l’aide de la cmdlet  adéquate.
+
+
+
+> Configurez le routeur de manière à ce qu’il n’accepte des requêtes SNMP que de la part de votre machine Windows 10 A uniquement. Validez votre configuration en vérifiant que votre machine Windows 10 B n’y a plus accès.
+
+
 
 ## Objectif 4 - MIBs privées
 
