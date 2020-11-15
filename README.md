@@ -122,7 +122,7 @@ Et dans la réponse, on a le nom de la machine dans le champ **variable-binding-
 
 > Configurez le routeur cisco de manière à pouvoir le gérer via SNMPv2 (choisissez « cisco » pour community string RO et « ciscor » pour community string RW). Configurez également le routeur pour qu’il envoie ses traps snmp au manager.
 
-![](./img/cisco.png)
+![](./img/cisco.PNG)
 
 > Créez un nouveau profil dans l’application SNMPb pour pouvoir gérer votre routeur.
 
