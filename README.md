@@ -126,7 +126,7 @@ Et dans la réponse, on a le nom de la machine dans le champ **variable-binding-
 
 > Créez un nouveau profil dans l’application SNMPb pour pouvoir gérer votre routeur.
 
-![](./img/cisco_conf1.png)
+![](./img/cisco_conf1.jpg)
 
 ![](./img/cisco_conf2.png)
 
@@ -148,7 +148,9 @@ Et dans la réponse, on a le nom de la machine dans le champ **variable-binding-
 
 > Récupérez le nom de votre routeur à l’aide de la cmdlet  adéquate.
 
-
+```powershell
+PS> Get-SNMP 192.168.1.1 sysName.0 -Community cisco
+```
 
 > Configurez le routeur de manière à ce qu’il n’accepte des requêtes SNMP que de la part de votre machine Windows 10 A uniquement. Validez votre configuration en vérifiant que votre machine Windows 10 B n’y a plus accès.
 
