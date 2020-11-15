@@ -122,11 +122,11 @@ Et dans la réponse, on a le nom de la machine dans le champ **variable-binding-
 
 > Configurez le routeur cisco de manière à pouvoir le gérer via SNMPv2 (choisissez « cisco » pour community string RO et « ciscor » pour community string RW). Configurez également le routeur pour qu’il envoie ses traps snmp au manager.
 
-![](./img/cisco.png)
+![](./img/cisco.PNG)
 
 > Créez un nouveau profil dans l’application SNMPb pour pouvoir gérer votre routeur.
 
-![](./img/cisco_conf1.png)
+![](./img/cisco_conf1.jpg)
 
 ![](./img/cisco_conf2.png)
 
@@ -161,7 +161,9 @@ Passer à la version 3 de SNMP si l'équipement le supporte car il y a de l'auth
 
 > Récupérez le nom de votre routeur à l’aide de la cmdlet  adéquate.
 
-
+```powershell
+PS> Get-SNMP 192.168.1.1 sysName.0 -Community cisco
+```
 
 > Configurez le routeur de manière à ce qu’il n’accepte des requêtes SNMP que de la part de votre machine Windows 10 A uniquement. Validez votre configuration en vérifiant que votre machine Windows 10 B n’y a plus accès.
 
