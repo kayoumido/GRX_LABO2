@@ -92,15 +92,29 @@ Et maintenant, si l'on interroge l'agent Win B afin d'obtenir la `description sy
 
 | N°   | Octets rentrant | Octets sortant |
 | ---- | --------------- | -------------- |
-| 1    |                 |                |
-| 2    |                 |                |
-| 3    |                 |                |
-| 4    |                 |                |
-| 5    |                 |                |
-| 6    |                 |                |
-| 7    |                 |                |
-| 8    |                 |                |
-| 9    |                 |                |
+| 1    | 0               |                |
+| 2    | 0               |                |
+| 3    | 0               |                |
+| 4    | 0               |                |
+| 5    | 0               |                |
+| 6    | 0               |                |
+| 7    | 0               |                |
+| 8    | 0               |                |
+| 9    | 0               |                |
+| 10   | 0               |                |
+| 11   | 0               |                |
+| 12   | 0               |                |
+| 13   | 0               |                |
+| 14   | 4430692         |                |
+| 15   | 4433265         |                |
+| 16   | 11395430        |                |
+| 17   | 24910978        |                |
+| 18   | 0               |                |
+| 19   | 0               |                |
+| 20   | 0               |                |
+| 21   | 0               |                |
+| 22   | 0               |                |
+| 23   | 0               |                |
 
 
 
@@ -194,10 +208,31 @@ Afin d’interroger des objets spécifiques à votre équipement, vous avez beso
 snmp-server view ViewDefault iso included
 snmp-server group GRX v3 priv read ViewDefault
 snmp-server user jerome GRX v3 auth sha password priv des privacyPassword
+# pour supprimer l'usage de la version 1 et 2
+no snmp-server community cisco 
+no snmp-server community ciscorw 
 ````
+
+On constate que si on fait des requêtes sur le router en version 1 et 2, il y a désormais un timeout qui apparaît. 
 
 > Configurez votre application SNMPb en conséquence et montrer le résultat d’une requête sur la valeur SysUpTime (MIB-2)
 
+Il faut d'abord créer un profil user SNMPV3. Puis dans le profil du router, cochez la case **SNMPV3**. 
 
+![](img/snmpv3.png)
+
+Dans l'onglet SnmpV3 du profil du router, sélectionner le security name qui a été paramétré auparavant ainsi que le type authentification.
+
+![](img/snmpv3_2.png)
 
 > Capturez/analysez les messages lors d’une requête SNMPv3
+
+On peut aussi voir que dans la requête, les données du messages sont transmissent en clair. 
+
+![](img/snmpv3_4.png)
+
+ 
+
+On constate que la version snmpV3 est notifié dans l'entête. Puis on voit que le nom d'utilisateur est en clair contrairement au mot de passe d'authentification et au mot de passe de privacy. On peut aussi voir que les données du message sont chiffrées 
+
+![](img/snmpv3_3.png)
