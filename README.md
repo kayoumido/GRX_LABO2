@@ -196,9 +196,16 @@ Afin d’interroger des objets spécifiques à votre équipement, vous avez beso
 
 > donnez la liste des MIBs que vous avez chargé.
 
+* CISCO-FLASH-MIB
+* CISCO-SMI
 
+> Note: Nous avons du ajouter `CISCO-SMI` car c'est une dépendance de `CISCO-FLASH-MIB`
 
 > montrez le résultat obtenu en effectuant un requête depuis l’application SNMPb
+
+![](../../../../../current/GRX/labo/lab02/img/objectif4_flashingo.jpg)
+
+> Taille de la mémoire flash embarquée sur le routeur
 
 ## Objectif 5 - Configurer les agents SNMP en mode v3
 
