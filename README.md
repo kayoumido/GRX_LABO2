@@ -92,33 +92,42 @@ Et maintenant, si l'on interroge l'agent Win B afin d'obtenir la `description sy
 
 | N°   | Octets rentrant | Octets sortant |
 | ---- | --------------- | -------------- |
-| 1    | 0               |                |
-| 2    | 0               |                |
-| 3    | 0               |                |
-| 4    | 0               |                |
-| 5    | 0               |                |
-| 6    | 0               |                |
-| 7    | 0               |                |
-| 8    | 0               |                |
-| 9    | 0               |                |
-| 10   | 0               |                |
-| 11   | 0               |                |
-| 12   | 0               |                |
-| 13   | 0               |                |
-| 14   | 4430692         |                |
-| 15   | 4433265         |                |
-| 16   | 11395430        |                |
-| 17   | 24910978        |                |
-| 18   | 0               |                |
-| 19   | 0               |                |
-| 20   | 0               |                |
-| 21   | 0               |                |
-| 22   | 0               |                |
-| 23   | 0               |                |
+| 1    | 0               | 0              |
+| 2    | 0               | 0              |
+| 3    | 0               | 0              |
+| 4    | 0               | 0              |
+| 5    | 0               | 0              |
+| 6    | 0               | 0              |
+| 7    | 0               | 0              |
+| 8    | 0               | 0              |
+| 9    | 0               | 0              |
+| 10   | 0               | 0              |
+| 11   | 0               | 0              |
+| 12   | 0               | 0              |
+| 13   | 0               | 0              |
+| 14   | 0               | 0              |
+| 15   | 143228093       | 6094462        |
+| 16   | 143228093       | 6167312        |
+| 17   | 144602155       | 6224228        |
+| 18   | 0               | 0              |
+| 19   | 0               | 0              |
+| 20   | 0               | 0              |
+| 21   | 0               | 0              |
+| 22   | 0               | 0              |
+| 23   | 0               | 0              |
 
 
 
-> Trafic sur chaque interfaces 
+> Trafic sur chaque interfaces  
+> Note: Pour simplifier la récupération du trafic sur chaque interfaces, nous avons créé un petit script Powershell
+> ```powershell
+> for($i=1; $i -lt 24; ++$i) {
+>    echo("OutOctets");
+>    Get-SNMP 192.168.2.3 ifOutOctets.$i -Community not-public
+>    echo("InOctets");
+>    Get-SNMP 192.168.2.3 ifInOctets.$i -Community not-public
+> }
+> ```
 
 
 
