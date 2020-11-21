@@ -122,10 +122,10 @@ Et maintenant, si l'on interroge l'agent Win B afin d'obtenir la `description sy
 > Note: Pour simplifier la récupération du trafic sur chaque interfaces, nous avons créé un petit script Powershell
 > ```powershell
 > for($i=1; $i -lt 24; ++$i) {
->    echo("OutOctets");
->    Get-SNMP 192.168.2.3 ifOutOctets.$i -Community not-public
->    echo("InOctets");
->    Get-SNMP 192.168.2.3 ifInOctets.$i -Community not-public
+>        echo("OutOctets");
+>        Get-SNMP 192.168.2.3 ifOutOctets.$i -Community not-public
+>        echo("InOctets");
+>        Get-SNMP 192.168.2.3 ifInOctets.$i -Community not-public
 > }
 > ```
 
@@ -156,6 +156,8 @@ Et dans la réponse, on a le nom de la machine dans le champ **variable-binding-
 > Changez le nom du routeur à l’aide de l’application  SNMPb (nouveau nom : router<votre-nom>) tout en capturant/analysant les messages échangés à l’aide de Wireshark
 
 ![](img/setNameRouter.png)
+
+On voit sur la capture suivante que si l'on fait une requête sur le nom du routeur. On peut confirmer le changement.
 
 ![](img/setNameRouter1.png)
 
@@ -191,13 +193,14 @@ PS> Get-SNMP 192.168.1.1 sysName.0 -Community cisco
 > Configurez le routeur de manière à ce qu’il n’accepte des requêtes SNMP que de la part de votre machine Windows 10 A uniquement. Validez votre configuration en vérifiant que votre machine Windows 10 B n’y a plus accès.
 
 ````sh
+# à l'aide d'une access list on définit la machine winA comme étant la seule à pouvoir faire des requêtes
 access-list 99 permit 192.168.1.3
 access-list 99 deny any
 snmp-server community cisco ro 99
 snmp-server community ciscorw rw 99
 ````
 
-On peut constater que les requêtes sur la machine WinB aboutissent à un timeout.
+On peut constater que les requêtes sur la machine WinB aboutissent à un timeout. Ce qui veut dire qu'elle n'a plus l'accès au routeur
 
 ## Objectif 4 - MIBs privées
 
