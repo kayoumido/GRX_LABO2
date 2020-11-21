@@ -157,7 +157,7 @@ Ce n'est pas sécurisé car les messages ne sont pas authentifié. et les messag
 - Chiffrer les données transmissent sur le réseau
 - authentification des messages  
 
-Passer à la version 3 de SNMP si l'équipement le supporte car il y a de l'authentification. (et à voir pour le chiffrement)
+Passer à la version 3 de SNMP si l'équipement le supporte car il y a de l'authentification et du chiffrement.
 
 > Générez une trap SNMP en déclenchant un événement sur votre routeur (un peu d’imagination...) et vérifiez que vous récupérez bien la « SNMP trap » sur l’application SNMPb.
 
@@ -196,14 +196,14 @@ Afin d’interroger des objets spécifiques à votre équipement, vous avez beso
 
 > donnez la liste des MIBs que vous avez chargé.
 
-* CISCO-FLASH-MIB
+* CISCO-FLASH-
 * CISCO-SMI
 
 > Note: Nous avons du ajouter `CISCO-SMI` car c'est une dépendance de `CISCO-FLASH-MIB`
 
 > montrez le résultat obtenu en effectuant un requête depuis l’application SNMPb
 
-![](../../../../../current/GRX/labo/lab02/img/objectif4_flashingo.jpg)
+![](img/objectif4_flashingo.jpg)
 
 > Taille de la mémoire flash embarquée sur le routeur
 
@@ -212,9 +212,9 @@ Afin d’interroger des objets spécifiques à votre équipement, vous avez beso
 > Modifiez la configuration de votre router afin qu’il n’accepte plus que des requête SNMPv3.
 
 ````sh
-snmp-server view ViewDefault iso included
-snmp-server group GRX v3 priv read ViewDefault
-snmp-server user jerome GRX v3 auth sha password priv des privacyPassword
+access-list 1 permit 192.168.1.3
+snmp-server group GRX v3 noauth access 1
+snmp-server user jerome GRX v3 
 # pour supprimer l'usage de la version 1 et 2
 no snmp-server community cisco 
 no snmp-server community ciscorw 
@@ -223,6 +223,8 @@ no snmp-server community ciscorw
 On constate que si on fait des requêtes sur le router en version 1 et 2, il y a désormais un timeout qui apparaît. 
 
 > Configurez votre application SNMPb en conséquence et montrer le résultat d’une requête sur la valeur SysUpTime (MIB-2)
+
+![](img/snmpv3_5.png)
 
 Il faut d'abord créer un profil user SNMPV3. Puis dans le profil du router, cochez la case **SNMPV3**. 
 
@@ -240,6 +242,6 @@ On peut aussi voir que dans la requête, les données du messages sont transmiss
 
  
 
-On constate que la version snmpV3 est notifié dans l'entête. Puis on voit que le nom d'utilisateur est en clair contrairement au mot de passe d'authentification et au mot de passe de privacy. On peut aussi voir que les données du message sont chiffrées 
+On constate que la version snmpV3 est notifié dans l'entête. Puis on voit que le nom d'utilisateur est en clair et on voit la valeur de réponse pour la requête **sysUpTime** dans l'entête data: get-response > variable-bindings.
 
 ![](img/snmpv3_3.png)
